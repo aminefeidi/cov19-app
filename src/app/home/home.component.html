@@ -1,0 +1,89 @@
+<section>
+  <div class="pageloader" [class.is-active]="isLoading"><span class="title">Loading...</span></div>
+  <div
+    class="container is-fluid"
+    style="padding-top: 1rem;height: 92vh;text-align: center;"
+    *ngIf="countries && globalData"
+  >
+    <h1 class="title is-2">Statistics</h1>
+    <div class="columns is-centered" style="text-align: center;">
+      <div class="column"></div>
+      <div class="column ">
+        <button
+          class="button is-danger is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'toll'"
+          (click)="switchType('toll')"
+        >
+          Confirmed: {{ globalData.toll }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-primary is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'recovered'"
+          (click)="switchType('recovered')"
+        >
+          Recovered: {{ globalData.recovered }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-warning is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'deaths'"
+          (click)="switchType('deaths')"
+        >
+          Deceased: {{ globalData.deaths }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-link is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'sick'"
+          (click)="switchType('sick')"
+        >
+          Sick: {{ globalData.sick }}
+        </button>
+      </div>
+      <div class="column"></div>
+    </div>
+    <div class="columns is-centered" style="text-align: center;">
+      <div class="column is-half" id="chart">
+        <ngx-charts-bar-vertical
+          [scheme]="barChartColorScheme"
+          [results]="barChartData"
+          [gradient]="true"
+          [xAxis]="true"
+          [yAxis]="false"
+          [legend]="false"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          yAxisLabel="Confirmed Cases"
+          xAxisLabel="Country"
+          [yScaleMax]="barChartMax"
+          showDataLabel="true"
+          tooltipDisabled="true"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+      <div class="column is-half" id="chart">
+        <ngx-charts-area-chart
+          [scheme]="lineChartColorScheme"
+          [legend]="false"
+          [gradient]="false"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxis]="true"
+          [yAxis]="false"
+          xAxisLabel="Date"
+          yAxisLabel="Number Of Cases"
+          [timeline]="false"
+          [results]="lineChartData"
+          [yScaleMax]="lineChartMax"
+          [showGridLines]="false"
+          [curve]="curve"
+        >
+        </ngx-charts-area-chart>
+      </div>
+    </div>
+  </div>
+</section>

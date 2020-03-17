@@ -1,0 +1,50 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" routerLink="">
+      <img
+        src="../assets/visuals/bacteria.png"
+        width="115"
+        height="28"
+      />
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger burger"
+      [class.is-active]="navStatus"
+      (click)="navToggle()"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div
+    id="navbarBasicExample"
+    class="navbar-menu"
+    [class.is-active]="navStatus"
+  >
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="" (click)="navToggle()">
+        Overall
+      </a>
+      <a class="navbar-item" routerLink="countries" (click)="navToggle()">
+        Countries
+      </a>
+      <a class="navbar-item" routerLink="map" (click)="navToggle()">
+        Map
+      </a>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item tags has-addons are-medium">
+        <span class="tag">Last Update:</span>
+        <span class="tag is-success">{{ lastUpdate }} ago</span>
+      </div>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

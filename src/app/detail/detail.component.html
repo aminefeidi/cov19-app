@@ -1,0 +1,73 @@
+<section>
+  <div class="pageloader is-bottom-to-top" [class.is-active]="isLoading"><span class="title">Loading...</span></div>
+  <div
+    class="container is-fluid"
+    *ngIf="country"
+    style="text-align: center;margin-top: 1rem;"
+  >
+    <figure class="image is-64x64" style="margin: 10px auto;">
+      <img src="../../assets/svg/{{ iconName }}.svg" onerror="this.src = '../../assets/svg/white.svg';" />
+    </figure>
+    <h1 class="title is-2">{{ country.name }}</h1>
+    <div class="columns is-centered" style="text-align: center;">
+      <div class="column"></div>
+      <div class="column ">
+        <button
+          class="button is-danger is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'toll'"
+          (click)="switchType('toll')"
+        >
+          Confirmed: {{ country.toll }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-primary is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'recovered'"
+          (click)="switchType('recovered')"
+        >
+          Recovered: {{ country.recovered }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-warning is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'deaths'"
+          (click)="switchType('deaths')"
+        >
+          Deceased: {{ country.deaths }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-link is-outlined is-rounded"
+          [class.is-focused]="selectedType === 'sick'"
+          (click)="switchType('sick')"
+        >
+          Sick: {{ country.sick }}
+        </button>
+      </div>
+      <div class="column"></div>
+    </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths" style="height: 50vh;">
+          <ngx-charts-area-chart
+          [scheme]="lineChartColorScheme"
+          [legend]="false"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          xAxisLabel="Date"
+          yAxisLabel="Number Of Cases"
+          [yScaleMax]="maxScale"
+          [timeline]="false"
+          [results]="lineChartData"
+          [showGridLines]="false"
+          [curve]="curve"
+        >
+        </ngx-charts-area-chart>
+        </div>
+      </div>
+  </div>
+</section>
