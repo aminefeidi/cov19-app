@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { DataService } from '../services/data.service';
 import { Country } from '../models/country';
 import * as shape from 'd3-shape';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-detail',
@@ -14,6 +15,8 @@ export class DetailComponent implements OnInit {
 
   public country : Country;
   iconName:string = "";
+
+  isSub:boolean = true;
 
   isLoading:boolean = true;
 
@@ -30,7 +33,9 @@ export class DetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private location:Location,
+    private notificationService:NotificationService
   ) {
     let id = this.route.snapshot.paramMap.get('id');
     this.dataService.getCountry(id).subscribe(res=>{
@@ -57,7 +62,8 @@ export class DetailComponent implements OnInit {
       }
     ]
     for (let [date,toll] of Object.entries(this.country.history[type])){
-      data[0]['series'].push({'name':date,'value':toll});
+      let JsDate = new Date(Date.parse(date))
+      data[0]['series'].push({'name':JsDate,'value':toll});
     }
     this.lineChartData = data;
     this.lineChartColorScheme = {
@@ -71,8 +77,19 @@ export class DetailComponent implements OnInit {
     this.selectedType = type;
   }
 
+  goBack(){
+    this.location.back();
+  }
+  
+  subscribe(){
+    this.notificationService.subscribe()
+    this.isSub = true;
+  }
+
   ngOnInit() {
-    
+    this.notificationService.getSubscription().subscribe(res=>{
+      if (!res) this.isSub = false; 
+    })
   }
 
 }

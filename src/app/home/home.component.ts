@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { FormControl } from '@angular/forms';
 import { Country } from '../models/country';
 import { GlobalData } from '../models/global';
-import { flatMap } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import * as shape from 'd3-shape';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +12,8 @@ import * as shape from 'd3-shape';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  isSub:boolean = true;
 
   countries:Country[];
 
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
     domain: ['hsl(348, 100%, 61%)']
   };
 
-  constructor(private dataService:DataService,private router:Router) { }
+  constructor(private dataService:DataService,private notificationService:NotificationService,private router:Router) {}
 
   loadBarChartData(type:string){
     this.countries.sort((a, b) => b[type] - a[type]);
@@ -59,7 +60,8 @@ export class HomeComponent implements OnInit {
       }
     ]
     for (let [date,toll] of Object.entries(this.globalData.history[type])){
-      data[0]['series'].push({'name':date,'value':toll});
+      let JsDate = new Date(Date.parse(date))
+      data[0]['series'].push({'name':JsDate,'value':toll});
     }
     this.lineChartData = data;
     this.lineChartColorScheme = {
@@ -100,6 +102,14 @@ export class HomeComponent implements OnInit {
     }).catch(err=>{
       this.router.navigate(['error']);
     })
+    this.notificationService.getSubscription().subscribe(res=>{
+      if (!res) this.isSub = false; 
+    })
+  }
+
+  subscribe(){
+    this.notificationService.subscribe()
+    this.isSub = true;
   }
 
 }

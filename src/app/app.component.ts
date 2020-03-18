@@ -7,7 +7,7 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Corona-Tracker';
+  title = 'Corona Tracker';
   navStatus = false;
   lastUpdate:string = "";
 

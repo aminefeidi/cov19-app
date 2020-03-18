@@ -14,7 +14,7 @@ export class DataService {
   public allData:Observable<Country[]> = new Observable<Country[]>();
   public globalData:Observable<GlobalData> = new Observable<GlobalData>();
 
-  public apiUrl:string = true ? 'https://arcane-island-41018.herokuapp.com':'http://192.168.1.102:3000';
+  public apiUrl:string = environment.production ? 'https://arcane-island-41018.herokuapp.com':'http://192.168.1.102:3000';
 
   constructor(private http:HttpClient) {
     this.allData = this.http.get<Country[]>(this.apiUrl+'/all').pipe(
@@ -53,5 +53,9 @@ export class DataService {
       retry(3),
       shareReplay(1)
     )
+  }
+
+  addSubscription(subscription){
+    return this.http.post(this.apiUrl+'/subscribe', subscription);
   }
 }

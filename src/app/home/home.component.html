@@ -1,11 +1,25 @@
 <section>
-  <div class="pageloader" [class.is-active]="isLoading"><span class="title">Loading...</span></div>
+  <div class="pageloader" [class.is-active]="isLoading">
+    <span class="title">Loading...</span>
+  </div>
   <div
     class="container is-fluid"
     style="padding-top: 1rem;height: 92vh;text-align: center;"
     *ngIf="countries && globalData"
   >
-    <h1 class="title is-2">Statistics</h1>
+    <div class="container" style="margin-bottom: 1rem;">
+      <h1 class="title is-2">Global Data</h1>
+      <button class="button is-rounded" tooltip="Notifications" (click)="subscribe()" [disabled]="isSub">
+        <span class="icon">
+          <i class="material-icons">
+            notifications_active
+          </i>
+        </span>
+        <span>
+          Subscribe
+        </span>
+      </button>
+    </div>
     <div class="columns is-centered" style="text-align: center;">
       <div class="column"></div>
       <div class="column ">

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { NgxChartsModule } from '@swimlane/ngx-charts'
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +19,11 @@ import { environment } from '../environments/environment';
 import { ErrorComponent } from './features/error/error.component';
 import { MapComponent } from './map/map.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { PopupComponent } from './features/popup/popup.component';
+import { from } from 'rxjs';
 
 @NgModule({
+  entryComponents:[PopupComponent],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -28,7 +32,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     CountriesComponent,
     DetailComponent,
     ErrorComponent,
-    MapComponent
+    MapComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     HttpClientModule,
     ReactiveFormsModule,
     NgxChartsModule,
+    TooltipModule,
     DeviceDetectorModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

@@ -1,13 +1,14 @@
 <section>
   <div class="pageloader" [class.is-active]="isLoading"><span class="title">Loading...</span></div>
   <div class="container is-fluid" style="margin-top: 1rem;">
+    <h1 class="title is-2" style="text-align: center;">Country Index</h1>
     <div class="field">
       <div class="control">
         <input class="input is-medium" type="text" placeholder="Search" [formControl]="searchText" />
       </div>
     </div>
-    <div class="container box">
-      <div *ngFor="let i of countries | search: searchText.value" class="notification">
+    <div class="container">
+      <div *ngFor="let i of countries | search: searchText.value" class="notification is-white">
         <h3 class="title is-3">
           <span class="icon">
             <img src="../../assets/svg/{{ nameToIcon(i.name) }}.svg" onerror="this.src = '../../assets/svg/white.svg';"/> </span>{{ i.name }}

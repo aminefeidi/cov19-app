@@ -2,8 +2,8 @@
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="">
       <img
-        src="../assets/visuals/bacteria.png"
-        width="115"
+        src="../assets/icons/icon-72x72.png"
+        width="28"
         height="28"
       />
     </a>
@@ -30,13 +30,28 @@
   >
     <div class="navbar-start">
       <a class="navbar-item" routerLink="" (click)="navToggle()">
-        Overall
+        <span class="icon">
+          <i class="material-icons">
+            home
+            </i>
+        </span>
+        <span>Overall</span>
       </a>
       <a class="navbar-item" routerLink="countries" (click)="navToggle()">
-        Countries
+        <span class="icon">
+          <i class="material-icons">
+            place
+            </i>
+        </span>
+        <span>Country</span>
       </a>
       <a class="navbar-item" routerLink="map" (click)="navToggle()">
-        Map
+        <span class="icon">
+          <i class="material-icons">
+            map
+            </i>
+        </span>
+        <span>Map</span>
       </a>
     </div>
     <div class="navbar-end">

@@ -5,10 +5,32 @@
     *ngIf="country"
     style="text-align: center;margin-top: 1rem;"
   >
-    <figure class="image is-64x64" style="margin: 10px auto;">
-      <img src="../../assets/svg/{{ iconName }}.svg" onerror="this.src = '../../assets/svg/white.svg';" />
-    </figure>
-    <h1 class="title is-2">{{ country.name }}</h1>
+    <div class="columns is-mobile is-vcentered">
+      <div class="column">
+        <button class="button is-rounded is-pulled-right" tooltip="Back" (click)="goBack()">
+          <span class="icon">
+            <i class="material-icons">
+              arrow_back
+              </i>
+          </span>
+        </button>
+      </div>
+      <div class="column">
+        <figure class="image is-64x64" style="margin: 10px auto;">
+          <img src="../../assets/svg/{{ iconName }}.svg" onerror="this.src = '../../assets/svg/white.svg';" />
+        </figure>
+        <h1 class="title is-2">{{ country.name }}</h1>
+      </div>
+      <div class="column">
+        <button class="button is-rounded is-pulled-left" tooltip="Notifications" (click)="subscribe()" [disabled]="isSub">
+          <span class="icon">
+            <i class="material-icons">
+              notifications_active
+              </i>
+          </span>
+        </button>
+      </div>
+    </div>
     <div class="columns is-centered" style="text-align: center;">
       <div class="column"></div>
       <div class="column ">
