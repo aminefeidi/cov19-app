@@ -17,7 +17,7 @@ export class CountriesComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getData().subscribe(res=>{
-      this.countries = res.sort((a, b) => b.toll - a.toll);
+      this.countries = res.sort((a, b) => b.sick - a.sick);
       this.isLoading = false;
     },
     err=>{

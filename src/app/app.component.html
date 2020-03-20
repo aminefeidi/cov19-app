@@ -53,11 +53,20 @@
         </span>
         <span>Map</span>
       </a>
+      <a class="navbar-item" routerLink="about" (click)="navToggle()">
+        <span class="icon">
+          <i class="material-icons">
+            info
+            </i>
+        </span>
+        <span>About</span>
+      </a>
     </div>
     <div class="navbar-end">
       <div class="navbar-item tags has-addons are-medium">
         <span class="tag">Last Update:</span>
-        <span class="tag is-success">{{ lastUpdate }} ago</span>
+        <span *ngIf="lastUpdate" class="tag is-success">{{ lastUpdate }} ago</span>
+        <span *ngIf="!lastUpdate" class="tag is-danger">down</span>
       </div>
     </div>
   </div>
