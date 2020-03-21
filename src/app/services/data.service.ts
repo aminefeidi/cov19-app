@@ -13,6 +13,8 @@ export class DataService {
 
   public allData:Observable<Country[]> = new Observable<Country[]>();
   public globalData:Observable<GlobalData> = new Observable<GlobalData>();
+  public userIp:Observable<any> = new Observable<any>();
+  ipAddress;
 
   public apiUrl:string = environment.production ? 'https://arcane-island-41018.herokuapp.com':'http://192.168.1.102:3000';
 
@@ -25,6 +27,7 @@ export class DataService {
       retry(3),
       shareReplay(1)
     )
+    this.userIp = this.http.get<{ip:string}>('https://jsonip.com').pipe(retry(3))
   }
 
   getData():Observable<Country[]>{
@@ -39,6 +42,10 @@ export class DataService {
     return this.http.get<Country>(this.apiUrl+'/country/'+id).pipe(
       retry(3),
     )
+  }
+
+  getUserIp(){
+    return this.userIp;
   }
 
   getMapData(){
@@ -57,5 +64,9 @@ export class DataService {
 
   addSubscription(subscription){
     return this.http.post(this.apiUrl+'/subscribe', subscription);
+  }
+
+  getCountryNameByIp(ip){
+      return this.http.get(this.apiUrl+'/userCountry/'+ip);
   }
 }

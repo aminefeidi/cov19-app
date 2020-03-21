@@ -15,7 +15,7 @@
       (click)="navToggle()"
       aria-label="menu"
       aria-expanded="false"
-      data-target="navbarBasicExample"
+      data-target="navbarBasic"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -24,11 +24,20 @@
   </div>
 
   <div
-    id="navbarBasicExample"
+    id="navbarBasic"
     class="navbar-menu"
     [class.is-active]="navStatus"
   >
     <div class="navbar-start">
+      <a *ngIf="userCountry" class="navbar-item" [routerLink]="['/details', userCountry.id]" (click)="navToggle()">
+        <span class="icon">
+          <img
+                  src="../assets/svg/{{ nameToIcon(userCountry.name) }}.svg"
+                  onerror="this.src = '../../assets/svg/white.svg';"
+                />
+        </span>
+        <span style="text-decoration-line: underline;">{{userCountry.name}}</span>
+      </a>
       <a class="navbar-item" routerLink="" (click)="navToggle()">
         <span class="icon">
           <i class="material-icons">
@@ -63,10 +72,24 @@
       </a>
     </div>
     <div class="navbar-end">
-      <div class="navbar-item tags has-addons are-medium">
-        <span class="tag">Last Update:</span>
-        <span *ngIf="lastUpdate" class="tag is-success">{{ lastUpdate }} ago</span>
-        <span *ngIf="!lastUpdate" class="tag is-danger">down</span>
+      <div class="navbar-item">
+        <button class="button is-small is-rounded" tooltip="Notifications" (click)="subscribe()" [disabled]="isSub">
+          <span class="icon is-small">
+            <i class="material-icons">
+              notifications_active
+            </i>
+          </span>
+          <span>
+            Subscribe
+          </span>
+        </button>
+      </div>
+      <div class="navbar-item" style="display: flex; justify-content: center;">
+        <div class="tags has-addons are-medium">
+          <span class="tag">Last Update:</span>
+          <span *ngIf="lastUpdate" class="tag is-success">{{ lastUpdate }} ago</span>
+          <span *ngIf="!lastUpdate" class="tag is-danger">down</span>
+        </div>
       </div>
     </div>
   </div>

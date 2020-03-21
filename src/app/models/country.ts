@@ -1,4 +1,5 @@
 export interface Country {
+    pos:number,
     id:number,
     name:string,
     toll:number,

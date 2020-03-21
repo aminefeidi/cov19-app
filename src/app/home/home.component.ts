@@ -102,14 +102,6 @@ export class HomeComponent implements OnInit {
     }).catch(err=>{
       this.router.navigate(['error']);
     })
-    this.notificationService.getSubscription().subscribe(res=>{
-      if (!res) this.isSub = false; 
-    })
-  }
-
-  subscribe(){
-    this.notificationService.subscribe()
-    this.isSub = true;
   }
 
 }

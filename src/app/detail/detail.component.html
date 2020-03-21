@@ -15,7 +15,7 @@
           </span>
         </button>
       </div>
-      <div class="column">
+      <div class="column is-half">
         <figure class="image is-64x64" style="margin: 10px auto;">
           <img src="../../assets/svg/{{ iconName }}.svg" onerror="this.src = '../../assets/svg/white.svg';" />
         </figure>
@@ -35,8 +35,8 @@
       <div class="column"></div>
       <div class="column ">
         <button
-          class="button is-danger is-outlined is-rounded"
-          [class.is-focused]="selectedType === 'toll'"
+          class="button is-danger is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'toll'"
           (click)="switchType('toll')"
         >
           Confirmed: {{ country.toll }}
@@ -44,8 +44,8 @@
       </div>
       <div class="column">
         <button
-          class="button is-primary is-outlined is-rounded"
-          [class.is-focused]="selectedType === 'recovered'"
+          class="button is-primary is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'recovered'"
           (click)="switchType('recovered')"
         >
           Recovered: {{ country.recovered }}
@@ -53,20 +53,20 @@
       </div>
       <div class="column">
         <button
-          class="button is-warning is-outlined is-rounded"
-          [class.is-focused]="selectedType === 'deaths'"
+          class="button is-warning is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'deaths'"
           (click)="switchType('deaths')"
         >
-          Deceased: {{ country.deaths }}
+          Dead: {{ country.deaths }}
         </button>
       </div>
       <div class="column">
         <button
-          class="button is-link is-outlined is-rounded"
-          [class.is-focused]="selectedType === 'sick'"
+          class="button is-link is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'sick'"
           (click)="switchType('sick')"
         >
-          Sick: {{ country.sick }}
+          Active: {{ country.sick }}
         </button>
       </div>
       <div class="column"></div>

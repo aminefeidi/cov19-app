@@ -1,26 +1,134 @@
 <section>
-  <div class="pageloader" [class.is-active]="isLoading"><span class="title">Loading...</span></div>
+  <div class="pageloader" [class.is-active]="isLoading">
+    <span class="title">Loading...</span>
+  </div>
   <div class="container is-fluid" style="margin-top: 1rem;">
-    <h1 class="title is-2" style="text-align: center;">Country Index</h1>
+    <div class="container" style="margin-bottom: 2rem;text-align: center;">
+      <h1 class="title is-2">Country Index</h1>
+    </div>
+    <div *ngIf="globalData" class="columns is-centered" style="text-align: center;">
+      
+      <div class="column ">
+        <button
+          class="button is-danger is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'toll'"
+          (click)="switchType('toll')"
+        >
+          Confirmed: {{ globalData.toll | number }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-primary is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'recovered'"
+          (click)="switchType('recovered')"
+        >
+          Recovered: {{ globalData.recovered | number }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-warning is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'deaths'"
+          (click)="switchType('deaths')"
+        >
+          Dead: {{ globalData.deaths | number }}
+        </button>
+      </div>
+      <div class="column">
+        <button
+          class="button is-link is-outlined is-rounded is-medium"
+          [class.is-hovered]="selectedType === 'sick'"
+          (click)="switchType('sick')"
+        >
+          Active: {{ globalData.sick | number }}
+        </button>
+      </div>
+      
+    </div>
     <div class="field">
       <div class="control">
-        <input class="input is-medium" type="text" placeholder="Search" [formControl]="searchText" />
+        <input
+          class="input is-medium"
+          type="text"
+          placeholder="Search"
+          [formControl]="searchText"
+        />
       </div>
     </div>
-    <div class="container">
-      <div *ngFor="let i of countries | search: searchText.value" class="notification is-white">
-        <h3 class="title is-3">
-          <span class="icon">
-            <img src="../../assets/svg/{{ nameToIcon(i.name) }}.svg" onerror="this.src = '../../assets/svg/white.svg';"/> </span>{{ i.name }}
-        </h3>
-        <div class="tags are-large">
-          <span class="tag is-danger">{{ i.toll }}</span>
-          <span class="tag is-info">{{ i.sick }}</span>
-          <span class="tag is-primary">{{ i.recovered }}</span>
-          <span class="tag is-warning">{{ i.deaths }}</span>
-          <span class="tag is-dark"><a style="text-decoration : none" [routerLink]="['/details', i.id]">Details</a></span>
+    <div class="table-container">
+      <!-- <div class="notification is-white">
+        <div class="columns is-mobile">
+          <div class="column">
+            
+          </div>
+          <div class="column">
+            <span class="tag is-large is-danger">Confirmed</span>
+          </div>
+          <div class="column"><span class="tag is-large is-info">active</span></div>
+          <div class="column"><span class="tag is-large is-primary">recovered</span></div>
+          <div class="column"><span class="tag is-large is-warning">dead</span></div>
+          <div class="column"></div>
         </div>
       </div>
+      <div
+        *ngFor="let i of countries | search: searchText.value"
+        class="notification"
+      >
+        <div class="columns">
+          <div class="column">
+            <h3 class="title is-3">
+              <span class="icon">
+                <img
+                  src="../../assets/svg/{{ nameToIcon(i.name) }}.svg"
+                  onerror="this.src = '../../assets/svg/white.svg';"
+                /> </span
+              >{{ i.name }}
+            </h3>
+          </div>
+          <div class="column">
+            <span class="tag is-large">{{ i.toll | number }}</span>
+          </div>
+          <div class="column"><span class="tag is-large">{{ i.sick | number }}</span></div>
+          <div class="column"><span class="tag is-large">{{ i.recovered | number }}</span></div>
+          <div class="column"><span class="tag is-large">{{ i.deaths | number }}</span></div>
+          <div class="column">
+            <a
+              class="button is-medium is-dark is-pulled-right"
+              [routerLink]="['/details', i.id]"
+              >Details</a
+            >
+          </div>
+        </div>
+        <div class="tags are-large">
+          <span class="tag is-danger">{{ i.toll | number }}</span>
+          <span class="tag is-info">{{ i.sick | number }}</span>
+          <span class="tag is-primary">{{ i.recovered | number }}</span>
+          <span class="tag is-warning">{{ i.deaths | number }}</span>
+        </div>
+      </div> -->
+      <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th><abbr title="Position">POS</abbr></th>
+            <th>Name</th>
+            <th class="has-text-danger">Confirmed</th>
+            <th class="has-text-primary">Recovered</th>
+            <th class="has-text-warning">Dead</th>
+            <th class="has-text-link">Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of countries | search: searchText.value">
+            <th>{{c.pos + 1}}</th>
+            <th><a [routerLink]="['/details', c.id]">{{c.name | uppercase }}</a></th>
+            <th>{{c.toll | number}}</th>
+            <th>{{c.recovered | number}}</th>
+            <th>{{c.deaths | number}}</th>
+            <th>{{c.sick | number}}</th>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
